@@ -84,8 +84,8 @@ Please download the latest version of RasPiWrite from %s''' % dlURL
 			'''
 
 	except urllib2.URLError, e:
-    		print """There was an error in checking for an update: %r
-    		""" % e
+		print """There was an error in checking for an update: %r
+		""" % e
 
 
 def grabRoot(distro): #Parses the raspberry pi downloads page for the links for the currently RasPiWrite supported distros
@@ -174,13 +174,13 @@ class transferInBackground (threading.Thread): 	#Runs the dd command in a thread
 	global path
 	if OS[0] != 'Darwin':
 		copyString = 'dd bs=1M if=%s of=%s' % (path,SDsnip)
-	else
+	else:
 		copyString = 'dd bs=1m if=%s of=%s' % (path,SDsnip)
 	print 'Running ' + copyString + '...'
 
 	print getoutput(copyString)
 	print 'done!'
-     
+
 
 def transfer(file,archiveType,obtain,SD,URL):	#unzips the disk image
 	global path
@@ -272,10 +272,10 @@ def transfer(file,archiveType,obtain,SD,URL):	#unzips the disk image
 		SDsnip = "/dev/mmcblk" + SD[11]
 	else:
 		if OS[0] != 'Darwin': 
-        	SDsnip =  SD.replace(' ', '')[:-1]
- 		else:
- 			# remove weird partition notation in OS X partition names
-        	SDsnip =  SD.replace(' ', '')[:-2]
+			SDsnip =  SD.replace(' ', '')[:-1]
+		else:
+			# remove weird partition notation in OS X partition names
+			SDsnip =  SD.replace(' ', '')[:-2]
 
 	print path
 	print '\n\n###################################################################'
@@ -298,16 +298,16 @@ GNU General Public License for more details.
 	print '###################################################################\n'
 	confirm = raw_input(boldStart + 'Please verify this information before typing \'accept\' to accept the terms and to start the process, if this information isn\'t correct, please press ctrl + c (^C), or type \'exit\' to quit: ' + end)
 	if confirm == 'accept':
-   		thread1 = transferInBackground()
-   		thread1.start()
+		thread1 = transferInBackground()
+		thread1.start()
 		sys.stdout.write("Waiting")
-   		sys.stdout.flush()
+		sys.stdout.flush()
 		while thread1.isAlive():
 			time.sleep(3)
 			sys.stdout.write(".")
-   			sys.stdout.flush()
-   		print 'Transfer Complete! Please remove the SD card'
-   		print """###########################################
+			sys.stdout.flush()
+		print 'Transfer Complete! Please remove the SD card'
+		print """###########################################
 Relevent information:
 > Debian - Login is pi/raspberry
 > Arch - Login is root/root
@@ -387,7 +387,7 @@ QtonPi is an Embedded Linux platform plus SDK optimized for developing and runni
 			if matchBzip is not None:
 				print 'found Bz2'
 				transfer(userLocate, 'bz2', 'usr',SD,'none')
-    		
+			
 				
 		else:
 			print 'sorry, the file you have specified doesn\'t exist, please try again'
